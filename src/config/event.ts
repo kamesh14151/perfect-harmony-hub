@@ -1,3 +1,5 @@
+import logoPlaceholder from "@/assets/placeholders/logo.png.asset.json";
+
 export const event = {
   name: "SPARKS26",
   date: "2026-10-15",
@@ -10,6 +12,8 @@ export const event = {
   registrationUrl: null as string | null,
   introVideoPath: "/videos/intro.mp4",
   logoUrl: null as string | null,
+  logoFilename: "logo.png",
+  logoPlaceholderUrl: logoPlaceholder.url,
   videoPosterUrl: null as string | null,
   email: null as string | null,
   phone: null as string | null,

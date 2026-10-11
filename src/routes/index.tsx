@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Navbar, Footer } from "@/components/event-chrome";
-import { IntroVideo, Hero, About, Tracks, Schedule, Organizers, Registration, FAQ } from "@/components/event-sections";
+import { IntroVideo, Hero, Registration, FAQ } from "@/components/event-sections";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -14,5 +13,5 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 function Index() {
-  return <><a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-card focus:p-4">Skip to content</a><Navbar /><main id="main-content"><div id="home"><IntroVideo /><Hero /></div><About /><Tracks /><Schedule /><Organizers /><Registration /><FAQ /></main><Footer /></>;
+  return <><div id="home"><IntroVideo /><Hero /></div><Registration /><FAQ /></>;
 }
