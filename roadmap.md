@@ -1,4 +1,7 @@
 # SPARKS26
+- [ ] Move About, Tracks, Schedule, and Organizers to dedicated pages and update navigation.
+- [ ] Modernize organizer cards and prepare named asset placeholders and final-information checklist.
+- [ ] Verify dedicated pages, placeholder states, mobile navigation and card layout.
 - [x] Build the complete single-scroll event experience and design system.
 - [x] Add all 14 organizers and truthful configurable event information.
 - [x] Verify navigation, themes, FAQ, countdown and mobile layout.
