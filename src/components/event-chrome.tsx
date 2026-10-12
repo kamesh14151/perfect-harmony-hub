@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, CheckCircle2, Mail, Menu, Moon, Search, Sun, X } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Mail, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -41,12 +41,12 @@ export function Brand({
           <img
             className="film-logo hover:scale-105 transition-transform duration-300 w-24 h-24 object-contain"
             src={logoSrc}
-            alt="AuraGen 2026"
+            alt="AuraGen"
             onError={() => setFailed(true)}
           />
         )}
         <span className="film-title text-3xl font-extrabold tracking-tight text-white">
-          Aura<span className="text-[#bf472c]">Gen '26</span>
+          Aura<span className="text-[#bf472c]">Gen</span>
         </span>
       </div>
     );
@@ -55,21 +55,19 @@ export function Brand({
   return (
     <span className="inline-flex items-center gap-2.5 group">
       {!failed && (
-        <span className="brand-logo-frame relative flex items-center justify-center p-1 rounded-xl bg-[#bf472c]/10 border border-[#bf472c]/20 shadow-xs transition-all duration-300 group-hover:scale-105">
-          <img
-            className="brand-image rounded-lg w-7 h-7 sm:w-8 sm:h-8 object-contain"
-            src={logoSrc}
-            alt="AuraGen"
-            onError={() => setFailed(true)}
-          />
-        </span>
+        <img
+          className="brand-image w-8 h-8 sm:w-9 sm:h-9 object-contain transition-transform duration-300 group-hover:scale-105"
+          src={logoSrc}
+          alt="AuraGen"
+          onError={() => setFailed(true)}
+        />
       )}
       <span
         className={`font-sans font-extrabold text-2xl tracking-tight transition-colors ${
           inverse ? "text-white" : "text-[#2c1d18] dark:text-white"
         }`}
       >
-        Aura<span className="text-[#bf472c]">Gen '26</span>
+        Aura<span className="text-[#bf472c]">Gen</span>
       </span>
     </span>
   );
@@ -324,12 +322,9 @@ export function RegistrationButton({
 
 export function Navbar() {
   const [menu, setMenu] = useState(false);
-  const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -343,18 +338,6 @@ export function Navbar() {
     document.addEventListener("keydown", close);
     return () => document.removeEventListener("keydown", close);
   }, [menu]);
-
-  const toggleTheme = () => {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    try {
-      localStorage.setItem("auragen-theme", next ? "dark" : "light");
-      localStorage.setItem("sparks26-theme", next ? "dark" : "light");
-    } catch {
-      /* Preference remains available for this visit. */
-    }
-  };
 
   return (
     <>
@@ -396,26 +379,6 @@ export function Navbar() {
 
             <button
               type="button"
-              onClick={() => setSearchOpen(true)}
-              aria-label="Search"
-              className="p-1.5 rounded-full transition-colors cursor-pointer text-[#2c1d18] hover:text-[#bf472c] dark:text-[#f4efe6]"
-            >
-              <Search size={18} />
-            </button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-              title={dark ? "Light theme" : "Dark theme"}
-              className="rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-[#2c1d18] dark:text-[#f4efe6] transition-colors"
-            >
-              {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
-
-            <button
-              type="button"
               className="md:hidden p-1.5 transition-colors cursor-pointer text-[#2c1d18] dark:text-[#f4efe6]"
               onClick={() => setMenu(!menu)}
               aria-label={menu ? "Close navigation" : "Open navigation"}
@@ -447,63 +410,6 @@ export function Navbar() {
           </nav>
         )}
       </header>
-
-      {/* Quick Search Modal */}
-      <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-lg font-serif">Search AuraGen 2026</DialogTitle>
-            <DialogDescription className="text-xs">
-              Search hackathon tracks, schedule, rules, guidelines, FAQs, or organizers.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 pt-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search tracks, timeline, rules, or questions..."
-                className="pl-9 text-xs"
-                autoFocus
-              />
-            </div>
-            <div className="text-xs space-y-1.5 text-muted-foreground">
-              <p className="font-semibold text-foreground text-[11px] uppercase tracking-wider">
-                Quick Navigation
-              </p>
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                <Link
-                  to="/tracks"
-                  onClick={() => setSearchOpen(false)}
-                  className="px-2.5 py-1 rounded-full bg-muted hover:bg-muted/80 text-[11px]"
-                >
-                  Tracks &amp; Themes
-                </Link>
-                <Link
-                  to="/schedule"
-                  onClick={() => setSearchOpen(false)}
-                  className="px-2.5 py-1 rounded-full bg-muted hover:bg-muted/80 text-[11px]"
-                >
-                  Schedule &amp; Milestones
-                </Link>
-                <Link
-                  to="/faq"
-                  onClick={() => setSearchOpen(false)}
-                  className="px-2.5 py-1 rounded-full bg-muted hover:bg-muted/80 text-[11px]"
-                >
-                  FAQs &amp; Rules
-                </Link>
-                <Link
-                  to="/organizers"
-                  onClick={() => setSearchOpen(false)}
-                  className="px-2.5 py-1 rounded-full bg-muted hover:bg-muted/80 text-[11px]"
-                >
-                  Organizers
-                </Link>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </>
   );
 }

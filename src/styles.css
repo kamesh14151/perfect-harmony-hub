@@ -850,10 +850,12 @@
     gap: 16px;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 640px) {
   .organizer-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+    max-width: 420px;
+    margin-inline: auto;
   }
 }
 .organizer-card {
@@ -1252,8 +1254,10 @@
     background: var(--background);
   }
   .organizer-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 13px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 420px;
+    margin-inline: auto;
   }
   .organizer-info {
     padding: 15px 7px 10px;
