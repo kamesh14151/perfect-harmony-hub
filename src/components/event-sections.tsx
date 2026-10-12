@@ -233,22 +233,22 @@ export function Hero() {
     >
       <div className="shell">
         {/* Ultra-Premium Glassmorphic Briefing & Countdown Hero Bar */}
-        <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 sm:p-12 md:p-16 border border-border/80 shadow-2xl bg-[#0c0e12] text-white">
-          {/* Sona College Campus Photograph Sized to this Bar Alone */}
+        <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 sm:p-12 md:p-16 border border-black/20 dark:border-white/20 shadow-2xl bg-black/40 text-white">
+          {/* Sona College Campus Photograph Sized to this Bar Alone - Vivid & Highly Visible */}
           <div className="absolute inset-0 z-0 pointer-events-none">
             <img
               src="/IMG_dbbd97c0-dd87-4ff2-b952-92fff78f57aa.jpg"
               alt="Sona College of Technology Campus"
-              className="w-full h-full object-cover object-center filter brightness-[0.72] contrast-[1.1]"
+              className="w-full h-full object-cover object-center filter brightness-100 contrast-[1.05]"
             />
-            {/* Cinematic gradient & vignette to keep campus clearly visible while guaranteeing sharp contrast */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/88 via-black/75 to-black/45" />
-            <div className="absolute inset-0 bg-radial from-transparent via-black/15 to-black/50 pointer-events-none" />
+            {/* Lighter protective gradient: dark on left for text readability, clear and bright on center/right for campus visibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/15" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
           </div>
 
           {/* Ambient Accent Glows */}
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#bf472c]/30 blur-3xl pointer-events-none z-0" />
-          <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#bf472c]/20 blur-3xl pointer-events-none z-0" />
+          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#bf472c]/20 blur-3xl pointer-events-none z-0" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#bf472c]/15 blur-3xl pointer-events-none z-0" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             {/* Left Column: Institutional Credibility & Details */}
