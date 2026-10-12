@@ -173,7 +173,7 @@ export function VideoHero() {
 
 export const IntroVideo = VideoHero;
 
-export function Countdown() {
+export function Countdown({ inverse = false }: { inverse?: boolean }) {
   const [values, setValues] = useState<ReturnType<typeof countdownValues> | null>(null);
   useEffect(() => {
     const update = () => setValues(countdownValues(Date.now()));
@@ -189,19 +189,37 @@ export function Countdown() {
       <div className="grid grid-cols-4 gap-2.5 sm:gap-4 max-w-lg">
         {(["days", "hours", "minutes", "seconds"] as const).map((label) => (
           <div
-            className="rounded-2xl bg-white/80 dark:bg-black/40 border border-[#ded5c7] dark:border-white/10 p-3 sm:p-4 text-center backdrop-blur-md shadow-xs hover:border-[#bf472c]/50 transition-colors"
+            className={`rounded-2xl p-3 sm:p-4 text-center backdrop-blur-md shadow-xs transition-colors ${
+              inverse
+                ? "bg-black/60 border border-white/20 text-white hover:border-[#bf472c]/80"
+                : "bg-white/80 dark:bg-black/40 border border-[#ded5c7] dark:border-white/10 text-[#2c1d18] dark:text-white hover:border-[#bf472c]/50"
+            }`}
             key={label}
           >
-            <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight font-mono text-[#2c1d18] dark:text-white">
+            <div
+              className={`text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight font-mono ${
+                inverse ? "text-white" : "text-[#2c1d18] dark:text-white"
+              }`}
+            >
               {values ? String(values[label]).padStart(2, "0") : "—"}
             </div>
-            <div className="text-[10px] sm:text-xs uppercase font-bold tracking-widest text-[#bf472c] mt-1">
+            <div
+              className={`text-[10px] sm:text-xs uppercase font-bold tracking-widest mt-1 ${
+                inverse ? "text-[#e8a391]" : "text-[#bf472c]"
+              }`}
+            >
               {label}
             </div>
           </div>
         ))}
       </div>
-      <p className="text-xs text-[#786c5e] dark:text-[#a09485] font-medium">{note}</p>
+      <p
+        className={`text-xs font-medium ${
+          inverse ? "text-white/80" : "text-[#786c5e] dark:text-[#a09485]"
+        }`}
+      >
+        {note}
+      </p>
     </div>
   );
 }
@@ -210,46 +228,55 @@ export function Hero() {
   return (
     <section
       id="vision"
-      className="relative z-10 bg-background text-foreground border-t border-border/80 pt-16 md:pt-20 pb-20 transition-colors"
+      className="relative z-10 w-full overflow-hidden bg-[#0c0e12] text-white border-t border-white/10 py-16 md:py-24"
       aria-label="AuraGen 2026 Overview"
     >
-      <div className="shell">
+      {/* Real Sona College Campus Photograph as Full Section Backdrop */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="/IMG_dbbd97c0-dd87-4ff2-b952-92fff78f57aa.jpg"
+          alt="Sona College of Technology Campus"
+          className="w-full h-full object-cover object-center scale-102 filter brightness-[0.75] contrast-[1.1]"
+        />
+        {/* Cinematic gradient & vignette: keeps the campus visible while ensuring high contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/85" />
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
+      </div>
+
+      <div className="shell relative z-10">
         {/* Ultra-Premium Glassmorphic Briefing & Countdown Hero Card */}
-        <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 sm:p-12 md:p-16 border border-border/80 shadow-2xl">
-          {/* Sona College of Technology Campus Photographic Background */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 sm:p-12 md:p-16 border border-white/20 bg-black/65 backdrop-blur-xl shadow-2xl">
+          {/* Sona College Campus Subtle Inner Watermark */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
             <img
               src="/IMG_dbbd97c0-dd87-4ff2-b952-92fff78f57aa.jpg"
               alt="Sona College of Technology Campus"
-              className="w-full h-full object-cover object-center filter contrast-[1.05]"
+              className="w-full h-full object-cover object-center"
             />
-            {/* Elegant frosted overlay for pristine readability in both light & dark modes */}
-            <div className="absolute inset-0 bg-white/88 dark:bg-[#0c0e12]/88 backdrop-blur-[4px] transition-colors" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/92 via-white/84 to-white/78 dark:from-[#0c0e12]/92 dark:via-[#0c0e12]/85 dark:to-[#0c0e12]/80" />
           </div>
 
-          {/* Subtle Ambient Accent Glows */}
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#bf472c]/15 blur-3xl pointer-events-none z-0" />
-          <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-brand/10 blur-3xl pointer-events-none z-0" />
+          {/* Ambient Accent Glows */}
+          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#bf472c]/30 blur-3xl pointer-events-none z-0" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#bf472c]/20 blur-3xl pointer-events-none z-0" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             {/* Left Column: Institutional Credibility & Details */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-[#bf472c]/10 text-[#bf472c] border border-[#bf472c]/20 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#bf472c] animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase bg-[#bf472c] text-white shadow-md">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 SONA COLLEGE OF TECHNOLOGY
               </div>
 
               <div>
-                <div className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+                <div className="text-xs font-semibold tracking-widest text-[#e8a391] uppercase">
                   DEPARTMENT OF AI &amp; ML
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-serif text-foreground mt-2 leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-serif text-white mt-2 leading-tight">
                   Next-Gen AI Hackathon
                 </h3>
               </div>
 
-              <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p className="text-sm sm:text-base text-white/90 leading-relaxed font-sans">
                 AuraGen 2026 brings student innovators together for an intensive 8-hour sprint.
                 Build AI-powered web applications, generative agents, and machine learning
                 prototypes at Shivva Ayyandurai Lab.
@@ -257,14 +284,14 @@ export function Hero() {
 
               {/* Event Chips */}
               <div className="flex flex-wrap gap-2.5 pt-1">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-muted/80 border border-border text-xs font-medium text-foreground">
-                  <Users size={13} className="text-[#bf472c]" />
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-white shadow-xs">
+                  <Users size={13} className="text-[#e8a391]" />
                   3–4 Members Per Team
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bf472c]/10 text-[#bf472c] border border-[#bf472c]/20 text-xs font-bold">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#bf472c] text-white text-xs font-bold shadow-xs">
                   100% Free Entry
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-muted/80 border border-border text-xs font-medium text-foreground">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-white shadow-xs">
                   All Year Students
                 </span>
               </div>
@@ -274,7 +301,7 @@ export function Hero() {
                 <RegistrationDialog>
                   <button
                     type="button"
-                    className="px-7 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#bf472c] hover:bg-[#a83d24] transition-all shadow-md hover:scale-102 active:scale-98 cursor-pointer inline-flex items-center gap-2"
+                    className="px-7 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#bf472c] hover:bg-[#a83d24] transition-all shadow-lg hover:scale-102 active:scale-98 cursor-pointer inline-flex items-center gap-2"
                   >
                     <span>Register Your Team</span>
                     <ArrowUpRight size={15} />
@@ -284,7 +311,7 @@ export function Hero() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="rounded-full !text-xs font-semibold"
+                  className="rounded-full !text-xs font-semibold bg-white/10 hover:bg-white/20 text-white border-white/30 backdrop-blur-md transition-all hover:scale-102"
                   asChild
                 >
                   <Link to="/tracks">
@@ -297,34 +324,34 @@ export function Hero() {
 
             {/* Right Column: Display Title, Meta, and Luxury Countdown */}
             <div className="lg:col-span-7 space-y-7">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-foreground tracking-tight leading-[1.12]">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-white tracking-tight leading-[1.12]">
                 Where Bold Ideas{" "}
-                <span className="italic text-[#bf472c]">Ignite Intelligence.</span>
+                <span className="italic text-[#e8a391]">Ignite Intelligence.</span>
               </h2>
 
               {/* Fast Facts Grid */}
               <div className="event-meta flex flex-wrap gap-3 text-xs font-medium">
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/80 text-foreground shadow-xs">
-                  <CalendarDays size={14} className="text-[#bf472c]" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-md shadow-xs">
+                  <CalendarDays size={14} className="text-[#e8a391]" />
                   Thursday, October 15, 2026 · {event.suggestedHours}
                 </span>
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/80 text-foreground shadow-xs">
-                  <MapPin size={14} className="text-[#bf472c]" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-md shadow-xs">
+                  <MapPin size={14} className="text-[#e8a391]" />
                   {event.room} · Salem
                 </span>
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/80 text-foreground shadow-xs">
-                  <Users size={14} className="text-[#bf472c]" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-black/50 text-white backdrop-blur-md shadow-xs">
+                  <Users size={14} className="text-[#e8a391]" />
                   {event.teamSize} · Free Entry
                 </span>
               </div>
 
               {/* Luxury Countdown Container */}
-              <div className="rounded-3xl bg-muted/40 dark:bg-black/30 border border-border/80 p-6 sm:p-8 backdrop-blur-md shadow-xs">
-                <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground mb-4 font-bold flex items-center justify-between">
+              <div className="rounded-3xl bg-black/55 border border-white/20 p-6 sm:p-8 backdrop-blur-xl shadow-lg">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-white/80 mb-4 font-bold flex items-center justify-between">
                   <span>Hackathon Launch Countdown</span>
-                  <span className="text-[#bf472c]">Live Clock</span>
+                  <span className="text-[#e8a391]">Live Clock</span>
                 </div>
-                <Countdown />
+                <Countdown inverse />
               </div>
             </div>
           </div>
