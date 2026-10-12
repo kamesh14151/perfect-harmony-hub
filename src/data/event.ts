@@ -23,6 +23,9 @@ export interface Organizer {
   department?: string;
   biography?: string;
   linkedin?: string;
+  instagram?: string;
+  twitter?: string;
+  threads?: string;
   email?: string;
   category?: string;
 }

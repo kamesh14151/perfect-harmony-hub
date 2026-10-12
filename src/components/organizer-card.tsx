@@ -23,13 +23,16 @@ export function OrganizerCard({ person, index }: { person: Organizer; index: num
         {/* Soft light overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/40 dark:to-black/30 pointer-events-none" />
 
-        {/* Top Right Action Button (+) */}
+        {/* Top Right Action Button: Follow on LinkedIn */}
         <a
-          href={person.email ? `mailto:${person.email}` : `mailto:${event.email}`}
-          title={`Contact ${person.name}`}
-          className="absolute top-2.5 right-2.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-md shadow-sm text-foreground flex items-center justify-center hover:scale-110 active:scale-95 transition-all border border-white/40 dark:border-white/20 cursor-pointer"
+          href={person.linkedin ?? "https://www.linkedin.com/school/sona-college-of-technology/"}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={`Follow ${person.name} on LinkedIn`}
+          aria-label={`Follow ${person.name} on LinkedIn`}
+          className="absolute top-2.5 right-2.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-md shadow-sm text-foreground flex items-center justify-center hover:scale-110 active:scale-95 transition-all border border-white/40 dark:border-white/20 cursor-pointer group/plus"
         >
-          <Plus size={15} />
+          <Plus size={15} className="group-hover/plus:rotate-90 transition-transform duration-300" />
         </a>
 
         {/* Top Left Index Pill */}
@@ -89,53 +92,58 @@ export function OrganizerCard({ person, index }: { person: Organizer; index: num
         </div>
       </div>
 
-      {/* Social Icons Bar at Bottom */}
-      <div className="flex items-center justify-center gap-5 pt-3 pb-1 text-muted-foreground">
-        {person.linkedin ? (
-          <a
-            href={person.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-foreground transition-colors p-1"
-            title="LinkedIn Profile"
-          >
-            <Linkedin size={15} />
-          </a>
-        ) : (
-          <a
-            href={`mailto:${event.email}`}
-            className="hover:text-foreground transition-colors p-1"
-            title="Email Organizer"
-          >
-            <Mail size={15} />
-          </a>
-        )}
-
-        {person.email ? (
-          <a
-            href={`mailto:${person.email}`}
-            className="hover:text-foreground transition-colors p-1"
-            title="Direct Contact"
-          >
-            <Mail size={15} />
-          </a>
-        ) : (
-          <span
-            className="p-1 hover:text-foreground cursor-default transition-colors"
-            title="AuraGen Core Organizer"
-          >
-            <Sparkles size={15} />
-          </span>
-        )}
-
+      {/* Social Icons Bar at Bottom: Insta, X, Threads (Matching Reference Mockup) */}
+      <div className="flex items-center justify-center gap-7 pt-3.5 pb-1 text-muted-foreground">
+        {/* Instagram */}
         <a
-          href="https://ajstudioz.co.in"
+          href={person.instagram ?? "https://instagram.com"}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-foreground transition-colors p-1"
-          title="Official Website"
+          className="hover:text-foreground transition-all p-1 hover:scale-115 active:scale-95"
+          title={`${person.name} on Instagram`}
+          aria-label={`${person.name} on Instagram`}
         >
-          <Globe size={15} />
+          <svg
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+          </svg>
+        </a>
+
+        {/* X (Twitter) */}
+        <a
+          href={person.twitter ?? "https://x.com"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-foreground transition-all p-1 hover:scale-115 active:scale-95"
+          title={`${person.name} on X`}
+          aria-label={`${person.name} on X`}
+        >
+          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </a>
+
+        {/* Threads */}
+        <a
+          href={person.threads ?? "https://threads.net"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-foreground transition-all p-1 hover:scale-115 active:scale-95"
+          title={`${person.name} on Threads`}
+          aria-label={`${person.name} on Threads`}
+        >
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.001 2c-5.523 0-10 4.477-10 10s4.477 10 10 10c2.82 0 5.38-1.17 7.22-3.06l-1.42-1.42c-1.48 1.52-3.54 2.48-5.8 2.48-4.411 0-8-3.589-8-8s3.589-8 8-8c4.372 0 7.933 3.526 7.998 7.896-.033 1.944-.805 3.32-2.128 3.32-.782 0-1.47-.53-1.47-1.716V10.5c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5v.37c-.6-.57-1.42-.97-2.4-.97-2.481 0-4.5 2.019-4.5 4.5s2.019 4.5 4.5 4.5c1.19 0 2.22-.48 2.97-1.26.47 1.05 1.48 1.66 2.73 1.66 2.378 0 3.798-2.146 3.798-5.4 0-5.523-4.477-10-10-10zm0 13.5c-1.378 0-2.5-1.122-2.5-2.5s1.122-2.5 2.5-2.5 2.5 1.122 2.5 2.5-1.122 2.5-2.5 2.5z" />
+          </svg>
         </a>
       </div>
     </article>
