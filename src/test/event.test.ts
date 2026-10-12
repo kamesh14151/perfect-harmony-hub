@@ -6,7 +6,8 @@ describe("SPARKS26 event data", () => {
   it("includes all 14 confirmed organizers without fabricated portraits", () => {
     expect(organizers).toHaveLength(14);
     expect(new Set(organizers.map(person => person.name)).size).toBe(14);
-    expect(organizers.every(person => person.image === undefined)).toBe(true);
+    expect(organizers.every(person => person.imageIsPlaceholder === true)).toBe(true);
+    expect(organizers.every(person => person.imageFilename?.endsWith(".jpg"))).toBe(true);
   });
   it("keeps unconfirmed registration and official start time unset", () => {
     expect(event.startDateTime).toBeNull();
