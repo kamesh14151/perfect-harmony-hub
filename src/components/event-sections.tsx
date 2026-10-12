@@ -15,6 +15,8 @@ import {
   Sparkles,
   Users,
   Utensils,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,53 +51,72 @@ export function Eyebrow({ children, number }: { children: React.ReactNode; numbe
 }
 export function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const enableSound = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      videoRef.current.volume = 1;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsMuted(false);
+          })
+          .catch(() => {});
+      } else {
+        setIsMuted(false);
+      }
+    }
+  };
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Non-mutable: Video plays with sound constantly, cannot be muted
     video.volume = 1;
+
+    // Attempt unmuted autoplay right away
     video.muted = false;
-
-    let cleanupListeners: (() => void) | undefined;
-
     const playPromise = video.play();
+
     if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay policy: start video muted smoothly without any pause or buffering delay
-        video.muted = true;
-        video.play().catch(() => {});
-
-        // Unmute on the first user interaction smoothly
-        const enableSoundOnGesture = () => {
-          if (videoRef.current) {
-            videoRef.current.muted = false;
-            videoRef.current.volume = 1;
-            videoRef.current.play().catch(() => {});
-          }
-          cleanup();
-        };
-
-        const cleanup = () => {
-          window.removeEventListener("pointerdown", enableSoundOnGesture);
-          window.removeEventListener("click", enableSoundOnGesture);
-          window.removeEventListener("keydown", enableSoundOnGesture);
-          window.removeEventListener("touchstart", enableSoundOnGesture);
-          window.removeEventListener("scroll", enableSoundOnGesture);
-        };
-
-        cleanupListeners = cleanup;
-
-        window.addEventListener("pointerdown", enableSoundOnGesture, { once: true, passive: true });
-        window.addEventListener("click", enableSoundOnGesture, { once: true, passive: true });
-        window.addEventListener("keydown", enableSoundOnGesture, { once: true, passive: true });
-        window.addEventListener("touchstart", enableSoundOnGesture, { once: true, passive: true });
-        window.addEventListener("scroll", enableSoundOnGesture, { once: true, passive: true });
-      });
+      playPromise
+        .then(() => {
+          setIsMuted(false);
+        })
+        .catch(() => {
+          // Deployed browsers enforce Autoplay Policy: video plays muted until user interaction
+          video.muted = true;
+          setIsMuted(true);
+          video.play().catch(() => {});
+        });
     }
 
-    // Resume immediately if tab re-focuses or visibility changes
+    // Reliable user-gesture unmuter for deployed sites
+    const handleUserGesture = () => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        videoRef.current.volume = 1;
+        const res = videoRef.current.play();
+        if (res !== undefined) {
+          res
+            .then(() => {
+              setIsMuted(false);
+            })
+            .catch(() => {});
+        } else {
+          setIsMuted(false);
+        }
+      }
+    };
+
+    const gestures = ["pointerdown", "click", "touchstart", "touchend", "keydown"];
+    gestures.forEach((evt) => {
+      window.addEventListener(evt, handleUserGesture, { passive: true });
+      document.addEventListener(evt, handleUserGesture, { passive: true });
+    });
+
     const handleVisibility = () => {
       if (document.visibilityState === "visible" && videoRef.current) {
         videoRef.current.play().catch(() => {});
@@ -104,8 +125,11 @@ export function VideoHero() {
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
+      gestures.forEach((evt) => {
+        window.removeEventListener(evt, handleUserGesture);
+        document.removeEventListener(evt, handleUserGesture);
+      });
       document.removeEventListener("visibilitychange", handleVisibility);
-      if (cleanupListeners) cleanupListeners();
     };
   }, []);
 
@@ -121,7 +145,7 @@ export function VideoHero() {
         poster={event.videoPosterUrl ?? undefined}
         autoPlay
         loop
-        muted={false}
+        muted
         playsInline
         preload="auto"
         disablePictureInPicture
@@ -163,16 +187,51 @@ export function VideoHero() {
               College of Technology, Salem.
             </p>
 
-            {/* Ivory Pill Button */}
-            <a
-              href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3.5 rounded-full text-sm font-semibold bg-[#f7f3ec] text-[#2c1d18] hover:bg-white hover:scale-102 active:scale-98 transition-all shadow-xl cursor-pointer inline-flex items-center gap-2"
-            >
-              <span>Register Now</span>
-              <ArrowUpRight size={15} />
-            </a>
+            {/* Ivory Pill Button & Sound Activator */}
+            <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+              <a
+                href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 rounded-full text-sm font-semibold bg-[#f7f3ec] text-[#2c1d18] hover:bg-white hover:scale-102 active:scale-98 transition-all shadow-xl cursor-pointer inline-flex items-center gap-2"
+              >
+                <span>Register Now</span>
+                <ArrowUpRight size={15} />
+              </a>
+
+              {/* Sound Status / Enable Pill */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  enableSound();
+                }}
+                className={`inline-flex items-center gap-2 px-4 py-3 rounded-full text-xs font-semibold backdrop-blur-md transition-all shadow-xl cursor-pointer active:scale-95 ${
+                  isMuted
+                    ? "bg-[#bf472c] hover:bg-[#a63c23] text-white animate-pulse"
+                    : "bg-black/50 hover:bg-black/70 text-white/90 border border-white/20"
+                }`}
+                title={isMuted ? "Click to enable video sound" : "Sound is active"}
+                aria-label={isMuted ? "Click to enable video sound" : "Sound is active"}
+              >
+                {isMuted ? (
+                  <>
+                    <VolumeX size={15} className="animate-bounce" />
+                    <span>Tap for Sound</span>
+                  </>
+                ) : (
+                  <>
+                    <Volume2 size={15} className="text-[#bf472c] animate-pulse" />
+                    <span>Sound Active</span>
+                    <span className="flex items-end gap-0.5 h-3 ml-0.5" aria-hidden="true">
+                      <span className="w-0.5 h-2 bg-[#bf472c] rounded-full animate-pulse" />
+                      <span className="w-0.5 h-3 bg-[#bf472c] rounded-full animate-pulse [animation-delay:150ms]" />
+                      <span className="w-0.5 h-1.5 bg-[#bf472c] rounded-full animate-pulse [animation-delay:300ms]" />
+                    </span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Right Column: 3 Stats Columns */}
