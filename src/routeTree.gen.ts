@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OrganizersRouteImport } from './routes/organizers'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as TracksRouteImport } from './routes/tracks'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrganizersRoute = OrganizersRouteImport.update({
@@ -44,6 +50,7 @@ const TracksRoute = TracksRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/faq': typeof FaqRoute
   '/organizers': typeof OrganizersRoute
   '/schedule': typeof ScheduleRoute
   '/tracks': typeof TracksRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/faq': typeof FaqRoute
   '/organizers': typeof OrganizersRoute
   '/schedule': typeof ScheduleRoute
   '/tracks': typeof TracksRoute
@@ -59,21 +67,30 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/faq': typeof FaqRoute
   '/organizers': typeof OrganizersRoute
   '/schedule': typeof ScheduleRoute
   '/tracks': typeof TracksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/organizers' | '/schedule' | '/tracks'
+  fullPaths: '/' | '/about' | '/faq' | '/organizers' | '/schedule' | '/tracks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/organizers' | '/schedule' | '/tracks'
-  id: '__root__' | '/' | '/about' | '/organizers' | '/schedule' | '/tracks'
+  to: '/' | '/about' | '/faq' | '/organizers' | '/schedule' | '/tracks'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/faq'
+    | '/organizers'
+    | '/schedule'
+    | '/tracks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  FaqRoute: typeof FaqRoute
   OrganizersRoute: typeof OrganizersRoute
   ScheduleRoute: typeof ScheduleRoute
   TracksRoute: typeof TracksRoute
@@ -93,6 +110,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/organizers': {
@@ -122,6 +146,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  FaqRoute: FaqRoute,
   OrganizersRoute: OrganizersRoute,
   ScheduleRoute: ScheduleRoute,
   TracksRoute: TracksRoute,

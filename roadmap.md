@@ -1,4 +1,5 @@
 # SPARKS26
+
 - [x] Move About, Tracks, Schedule, and Organizers to dedicated pages and update navigation.
 - [x] Modernize organizer cards and prepare named asset placeholders and final-information checklist.
 - [x] Verify dedicated pages, placeholder states, mobile navigation and card layout.

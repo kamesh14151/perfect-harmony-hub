@@ -1,24 +1,24 @@
 # Perfect Harmony Hub
 
-Build perfectly 
+Build perfectly
 
 Also these are all organizers
 
-Kanish s 
+Kanish s
 
 2 Sarvesh p
 
 3 Ajay 😌
 
-4 Nithish 😎😂 
+4 Nithish 😎😂
 
-5 Dev 😊 
+5 Dev 😊
 
 6 Elango Member
 
 7 Nithyasri Member
 
-8 Kamesh Member — 
+8 Kamesh Member —
 
 9 Raaj Nikitaa Member
 

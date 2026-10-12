@@ -1,6 +1,7 @@
 # SPARKS26 — assets and final details
 
 ## Named placeholders
+
 The app currently uses neutral initials portraits, not real photos. Each placeholder is stored as a CDN asset pointer with its original filename preserved. Upload replacements in chat with these names:
 
 - Site mark supplied as `cropped_circle_image_1.png`; displayed unchanged and used for the square browser icon.
@@ -11,6 +12,7 @@ The app currently uses neutral initials portraits, not real photos. Each placeho
 For real portrait replacements, update the image pointer and set `imageIsPlaceholder` to false. The fallback still works when an image cannot load.
 
 ## Details still needed
+
 - Official registration URL, whether registration is open/closed, and deadline.
 - Official start and end times in IST, check-in time, and approved schedule.
 - Approval of suggested 9:00 AM–5:00 PM IST schedule, including check-in and submission times.

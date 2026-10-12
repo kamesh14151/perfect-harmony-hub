@@ -28,61 +28,199 @@ export interface Organizer {
 }
 
 export const organizers: Organizer[] = [
-  { name: "Kanish S", image: portrait0.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kanish-s.jpg" }, { name: "Sarvesh P", image: portrait1.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "sarvesh-p.jpg" }, { name: "Ajay", image: portrait2.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "ajay.jpg" },
-  { name: "Nithish", image: portrait3.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "nithish.jpg" }, { name: "Dev", image: portrait4.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "dev.jpg" }, { name: "Elango", image: portrait5.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "elango.jpg" },
-  { name: "Nithyasri", image: portrait6.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "nithyasri.jpg" }, { name: "Kamesh", image: portrait7.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kamesh.jpg" },
-  { name: "Raaj Nikitaa", image: portrait8.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "raaj-nikitaa.jpg" }, { name: "Kamali", image: portrait9.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kamali.jpg" },
-  { name: "Kavyashree", image: portrait10.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kavyashree.jpg" }, { name: "Sridevi", image: portrait11.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "sridevi.jpg" },
-  { name: "Srinivasan M", image: portrait12.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "srinivasan-m.jpg" }, { name: "Sudhish Vijai", image: portrait13.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "sudhish-vijai.jpg" },
+  {
+    name: "Kanish S",
+    image: portrait0.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "kanish-s.jpg",
+  },
+  {
+    name: "Sarvesh P",
+    image: "/organizers/Sarvesh.png",
+    imageIsPlaceholder: false,
+    role: "Organizer",
+    imageFilename: "Sarvesh.png",
+    department: "Department of AI & ML",
+  },
+  {
+    name: "Ajay",
+    image: portrait2.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "ajay.jpg",
+  },
+  {
+    name: "Nithish",
+    image: portrait3.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "nithish.jpg",
+  },
+  {
+    name: "Dev",
+    image: portrait4.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "dev.jpg",
+  },
+  {
+    name: "Elango",
+    image: portrait5.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "elango.jpg",
+  },
+  {
+    name: "Nithyasri",
+    image: "/organizers/Nithyasri.jpg",
+    imageIsPlaceholder: false,
+    role: "Organizer",
+    imageFilename: "Nithyasri.jpg",
+    department: "Department of AI & ML",
+  },
+  {
+    name: "Kamesh R",
+    image: "/organizers/Kamez.png",
+    imageIsPlaceholder: false,
+    role: "Organizer",
+    imageFilename: "Kamez.png",
+    department: "Department of AI & ML",
+  },
+  {
+    name: "Raaj Nikitaa",
+    image: portrait8.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "raaj-nikitaa.jpg",
+  },
+  {
+    name: "Kamali",
+    image: portrait9.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "kamali.jpg",
+  },
+  {
+    name: "Kavyashree",
+    image: portrait10.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "kavyashree.jpg",
+  },
+  {
+    name: "Sridevi",
+    image: "/organizers/Sridevi.png",
+    imageIsPlaceholder: false,
+    role: "Organizer",
+    imageFilename: "Sridevi.png",
+    department: "Department of AI & ML",
+  },
+  {
+    name: "Srinivasan M",
+    image: portrait12.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "srinivasan-m.jpg",
+  },
+  {
+    name: "Sudhish Vijai",
+    image: portrait13.url,
+    imageIsPlaceholder: true,
+    role: "Organizer",
+    imageFilename: "sudhish-vijai.jpg",
+  },
 ];
 
 export const tracks = [
-  { title: "Basic – AI-Powered Website Development", short: "Track 1 · Basic", description: "Build a useful website through AI prompting, iteration, and thoughtful design.", detail: "Use AI-assisted prompting to create and refine a working website. Suggested submission: a live URL or locally runnable site, a short prompt log, and a demo. Official problem statements are pending.", icon: "code" },
-  { title: "Advanced – Machine Learning, Generative AI, and Agentic AI", short: "Track 2 · Advanced", description: "Build intelligent solutions with machine learning, generative models, or AI agents.", detail: "Develop a working prototype using machine learning, generative AI, or agentic workflows. Suggested submission: runnable code, setup instructions, model or agent documentation, and a demo. Official problem statements are pending.", icon: "brain" },
+  {
+    title: "Basic – AI-Powered Website Development (Prompting)",
+    short: "Track 1 · Basic",
+    description:
+      "Build an interactive, responsive website through AI prompting, iterative design, and web technologies.",
+    detail:
+      "Harness AI-assisted prompting (ChatGPT, Claude, v0, etc.) to design and implement a modern, functional website. Submission requirements: working URL or local site code, prompt logs/documentation of the prompt engineering process, and a 3-minute demo video.",
+    icon: "code",
+  },
+  {
+    title: "Advanced – Machine Learning, Generative AI, and Agentic AI",
+    short: "Track 2 · Advanced",
+    description:
+      "Build intelligent systems leveraging machine learning models, generative AI pipelines, or autonomous agents.",
+    detail:
+      "Develop an end-to-end prototype using machine learning, generative models, or autonomous agent workflows (tool calling, multi-agent coordination, RAG). Submission requirements: GitHub repository, setup instructions, architecture documentation, and a live demonstration.",
+    icon: "brain",
+  },
 ];
 
-// Suggested by request; these timings are not the confirmed event schedule.
 export const schedule = [
-  { title: "Registration & Check-in", time: "9:00 – 9:30 AM" },
+  { title: "Registration & Team Check-in", time: "9:00 – 9:30 AM" },
   { title: "Opening Ceremony & Track Briefing", time: "9:30 – 10:00 AM" },
-  { title: "Hacking Begins", time: "10:00 AM – 12:30 PM" },
-  { title: "Lunch Break", time: "12:30 – 1:00 PM" },
-  { title: "Build, Mentor & Refine", time: "1:00 – 3:30 PM" },
-  { title: "Project Submission", time: "3:30 – 3:45 PM" },
-  { title: "Final Presentations & Judging", time: "3:45 – 4:45 PM" },
-  { title: "Results & Closing Ceremony", time: "4:45 – 5:00 PM" },
+  { title: "Hacking Sprint Begins", time: "10:00 AM – 12:30 PM" },
+  { title: "Lunch Break & Networking", time: "12:30 – 1:00 PM" },
+  { title: "Sprint Phase 2: Build & Mentor Review", time: "1:00 – 3:30 PM" },
+  { title: "Project Submission Cutoff", time: "3:30 – 3:45 PM" },
+  { title: "Live Demonstrations & Judging Panel", time: "3:45 – 4:45 PM" },
+  { title: "Winner Announcement & Closing Ceremony", time: "4:45 – 5:00 PM" },
 ];
 
 export const suggestedRules = [
-  "Teams of 3–4 members choose one track and submit one project.",
-  "Build the core project during the hackathon. Declare any pre-existing code, templates, datasets, or models.",
-  "AI tools and open-source resources are allowed; disclose their use and respect licenses.",
-  "Use only data you are authorized to access. Do not include private information, passwords, or API keys in submissions.",
-  "Credit all sources, work respectfully, and do not copy another team's project.",
-  "Bring a laptop, charger, and required software. Internet and lab equipment availability are to be confirmed.",
+  "Team Size: 3 to 4 members per team. Inter-departmental and mixed-year collaborations are encouraged.",
+  "Track Selection: Each team must choose either Track 1 (Basic) or Track 2 (Advanced) and submit one original project.",
+  "Original Development: All core project code must be developed during the hackathon hours. Pre-existing starter templates, libraries, or datasets must be clearly declared.",
+  "AI Tool Attribution: AI tools, LLMs, and prompt-assisted coding are permitted; teams must transparently document key prompts and AI tool usage.",
+  "Free Participation: Registration is completely free (₹0 fees). No entry or participation charges.",
+  "Hardware & Setup: Participants must bring their own laptops, chargers, adapters, and necessary software tools.",
+  "Ethics & Data Privacy: Use authorized data and public APIs only. Storing private credentials, personal data, or API keys in public repositories is strictly prohibited.",
+  "Fair Play: Plagiarism or submitting work that is not the team's own will result in immediate disqualification.",
+  "Deadlines: Submissions must be delivered before the 3:30 PM cutoff. Late submissions cannot be judged.",
 ];
+
 export const suggestedSubmission = [
-  "Submit a repository or project archive with a README, setup instructions, team names, and selected track.",
-  "Include a working demo or accessible website link; list AI tools, prompts, models, datasets, and external resources used.",
-  "Prepare a suggested 3-minute presentation and 2-minute Q&A covering the problem, solution, implementation, and limitations.",
-  "The official submission channel and final deadline will be announced by the organizers.",
+  "GitHub Repository Link: Public repo containing clean source code, setup instructions, README, and list of team members.",
+  "Live Demo / Runnable URL: Working deployed website or clear instructions to run locally for live evaluation.",
+  "Track 1 Deliverable: Prompt engineering log showing prompt iterations, model feedback, and creative design process.",
+  "Track 2 Deliverable: Architecture diagram, model/agent descriptions, dataset details, and API integrations.",
+  "Project Presentation: 3-minute pitch followed by 2 minutes of Q&A with the judges covering problem, solution, implementation, and future scope.",
 ];
+
 export const suggestedJudging = [
-  { criterion: "Problem relevance & impact", weight: 25 },
-  { criterion: "Working implementation", weight: 30 },
+  { criterion: "Working implementation & technical execution", weight: 30 },
+  { criterion: "Problem relevance & real-world impact", weight: 25 },
   { criterion: "Creativity & originality", weight: 20 },
-  { criterion: "Track-specific execution", weight: 15 },
-  { criterion: "Presentation & documentation", weight: 10 },
+  { criterion: "Track-specific execution & best practices", weight: 15 },
+  { criterion: "UI/UX design, documentation & presentation", weight: 10 },
 ];
 
 export const faqs = [
-  ["Who can participate in SPARKS26?", `Students from all years at ${event.institution} are eligible.`],
-  ["Is participation individual or team-based?", `Participation is team-based: ${event.teamSize}.`],
-  ["How do I register?", "The registration link, status, and deadline are still to be announced."],
-  ["What should participants bring?", "Suggested: a laptop, charger, and required software. Final equipment and internet arrangements are pending organizer approval."],
-  ["What are the official hackathon tracks?", "Track 1: Basic – AI-Powered Website Development (prompting). Track 2: Advanced – Machine Learning, Generative AI, and Agentic AI. Problem statements are to be announced."],
-  ["Is there a registration fee?", "No. Participation in SPARKS26 is free."],
-  ["Where will the event take place?", `${event.room}, ${event.institution}, Salem, Tamil Nadu.`],
-  ["What time does the event start?", "Suggested event hours are 9:00 AM – 5:00 PM IST on October 15, 2026. These timings are awaiting organizer approval."],
-  ["Whom should I contact for assistance?", `Contact the organizing team at ${event.email}.`],
+  [
+    "Who is eligible to participate in AuraGen 2026?",
+    `All-year students (1st, 2nd, 3rd, and 4th year across all departments) of ${event.institution} are eligible to participate.`,
+  ],
+  [
+    "What is the team size requirement?",
+    `Teams must consist of ${event.teamSize}. All team members must be enrolled students.`,
+  ],
+  [
+    "What are the confirmed tracks?",
+    "Track 1: Basic – AI-Powered Website Development (prompting). Track 2: Advanced – Machine Learning, Generative AI, and Agentic AI.",
+  ],
+  ["Is there any registration fee?", "No! Participation in AuraGen 2026 is 100% free (₹0)."],
+  ["Where is the venue?", `${event.room}, ${event.institution}, Salem, Tamil Nadu.`],
+  [
+    "What are the event timings?",
+    `${event.dateLabel}, 9:00 AM – 5:00 PM IST (8-hour hackathon sprint).`,
+  ],
+  [
+    "How do teams register?",
+    `Registration is open! Click 'Register Now' or email your team details to ${event.email}.`,
+  ],
+  [
+    "What should participants bring to the venue?",
+    "Bring your laptop, chargers, extension cords, college ID card, and any software development tools required.",
+  ],
+  [
+    "Who is organizing and supporting AuraGen 2026?",
+    `Organized by the Department of Artificial Intelligence and Machine Learning along with student organizers at Sona College of Technology. For queries, email ${event.email}.`,
+  ],
 ];
