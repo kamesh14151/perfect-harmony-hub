@@ -55,33 +55,58 @@ export function VideoHero() {
     if (!video) return;
 
     // Non-mutable: Video plays with sound constantly, cannot be muted
-    video.muted = false;
     video.volume = 1;
+    video.muted = false;
+
+    let cleanupListeners: (() => void) | undefined;
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        // If browser policies temporarily restrict unmuted autoplay before user interaction:
-        // Play muted so video starts instantly, and immediately unmute on first gesture.
+        // Autoplay policy: start video muted smoothly without any pause or buffering delay
         video.muted = true;
         video.play().catch(() => {});
 
+        // Unmute on the first user interaction smoothly
         const enableSoundOnGesture = () => {
           if (videoRef.current) {
             videoRef.current.muted = false;
             videoRef.current.volume = 1;
             videoRef.current.play().catch(() => {});
           }
+          cleanup();
+        };
+
+        const cleanup = () => {
+          window.removeEventListener("pointerdown", enableSoundOnGesture);
           window.removeEventListener("click", enableSoundOnGesture);
           window.removeEventListener("keydown", enableSoundOnGesture);
           window.removeEventListener("touchstart", enableSoundOnGesture);
+          window.removeEventListener("scroll", enableSoundOnGesture);
         };
 
-        window.addEventListener("click", enableSoundOnGesture, { once: true });
-        window.addEventListener("keydown", enableSoundOnGesture, { once: true });
-        window.addEventListener("touchstart", enableSoundOnGesture, { once: true });
+        cleanupListeners = cleanup;
+
+        window.addEventListener("pointerdown", enableSoundOnGesture, { once: true, passive: true });
+        window.addEventListener("click", enableSoundOnGesture, { once: true, passive: true });
+        window.addEventListener("keydown", enableSoundOnGesture, { once: true, passive: true });
+        window.addEventListener("touchstart", enableSoundOnGesture, { once: true, passive: true });
+        window.addEventListener("scroll", enableSoundOnGesture, { once: true, passive: true });
       });
     }
+
+    // Resume immediately if tab re-focuses or visibility changes
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible" && videoRef.current) {
+        videoRef.current.play().catch(() => {});
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      if (cleanupListeners) cleanupListeners();
+    };
   }, []);
 
   return (
@@ -89,28 +114,24 @@ export function VideoHero() {
       className="relative w-full min-h-[85vh] lg:min-h-[92vh] flex flex-col justify-end overflow-hidden bg-black text-white"
       aria-label="AuraGen 2026 Video Hero"
     >
-      {/* Full-bleed Background Video - Nonstop playable, non-mutable (always unmuted) */}
+      {/* Full-bleed Background Video - Nonstop smooth playback, preload auto, hardware-accelerated */}
       <video
         ref={videoRef}
         src={event.introVideoPath ?? "/Intro.mp4"}
         poster={event.videoPosterUrl ?? undefined}
         autoPlay
         loop
+        muted={false}
         playsInline
-        onVolumeChange={(e) => {
-          // Enforce non-mutable behavior: keep unmuted and full volume
-          if (e.currentTarget.muted) {
-            e.currentTarget.muted = false;
-          }
-          if (e.currentTarget.volume !== 1) {
-            e.currentTarget.volume = 1;
-          }
-        }}
-        onPause={(e) => {
-          // Video plays nonstop
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        onEnded={(e) => {
+          // Seamless loop fallback
+          e.currentTarget.currentTime = 0;
           e.currentTarget.play().catch(() => {});
         }}
-        className="absolute inset-0 w-full h-full object-cover scale-101 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none transform-gpu will-change-transform"
       />
 
       {/* Subtle Ambient Vignette & Bottom Dissolve */}
