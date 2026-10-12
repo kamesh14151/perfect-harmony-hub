@@ -21,9 +21,7 @@ export const event = {
   startDateTime: "2026-10-15T09:00:00+05:30" as string | null,
   endDateTime: "2026-10-15T17:00:00+05:30" as string | null,
   registrationStatus: "Open" as "Coming Soon" | "Open" | "Closed",
-  registrationUrl:
-    "mailto:auragenofficial@gmail.com?subject=AuraGen%202026%20Hackathon%20Registration" as
-      string | null,
+  registrationUrl: "https://events.ajstudioz.co.in/register/auragen-mafqr0",
   introVideoPath: "/Intro.mp4",
   logoUrl: "/logo.png" as string | null,
   studioLogoUrl: "/aj-logo.png",
@@ -32,7 +30,7 @@ export const event = {
   videoPosterUrl: null as string | null,
   email: "auragenofficial@gmail.com" as string | null,
   phone: null as string | null,
-  studioUrl: "https://ajstusioz.co.in" as string | null,
+  studioUrl: "https://ajstudiozz.vercel.app",
 };
 
 export function countdownValues(now: number, startDateTime: string | null = event.startDateTime) {

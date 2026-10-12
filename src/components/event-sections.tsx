@@ -115,14 +115,15 @@ export function VideoHero() {
             </p>
 
             {/* Ivory Pill Button */}
-            <RegistrationDialog>
-              <button
-                type="button"
-                className="px-8 py-3.5 rounded-full text-sm font-semibold bg-[#f7f3ec] text-[#2c1d18] hover:bg-white hover:scale-102 active:scale-98 transition-all shadow-xl cursor-pointer"
-              >
-                Register Now
-              </button>
-            </RegistrationDialog>
+            <a
+              href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 rounded-full text-sm font-semibold bg-[#f7f3ec] text-[#2c1d18] hover:bg-white hover:scale-102 active:scale-98 transition-all shadow-xl cursor-pointer inline-flex items-center gap-2"
+            >
+              <span>Register Now</span>
+              <ArrowUpRight size={15} />
+            </a>
           </div>
 
           {/* Right Column: 3 Stats Columns & Circular Play/Pause Button */}
@@ -289,15 +290,15 @@ export function Hero() {
 
               {/* CTA Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 pt-3">
-                <RegistrationDialog>
-                  <button
-                    type="button"
-                    className="px-7 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#bf472c] hover:bg-[#a83d24] transition-all shadow-lg hover:scale-102 active:scale-98 cursor-pointer inline-flex items-center gap-2"
-                  >
-                    <span>Register Your Team</span>
-                    <ArrowUpRight size={15} />
-                  </button>
-                </RegistrationDialog>
+                <a
+                  href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-7 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#bf472c] hover:bg-[#a83d24] transition-all shadow-lg hover:scale-102 active:scale-98 cursor-pointer inline-flex items-center gap-2"
+                >
+                  <span>Register Your Team</span>
+                  <ArrowUpRight size={15} />
+                </a>
 
                 <Button
                   variant="outline"

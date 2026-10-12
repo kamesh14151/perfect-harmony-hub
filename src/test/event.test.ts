@@ -46,7 +46,7 @@ describe("AuraGen 2026 event data", () => {
     expect(event.fee).toBe("Free");
     expect(event.teamSize).toBe("3–4 members per team");
     expect(event.email).toBe("auragenofficial@gmail.com");
-    expect(event.studioUrl).toBe("https://ajstusioz.co.in");
+    expect(event.studioUrl).toBe("https://ajstudiozz.vercel.app");
     expect(schedule).toHaveLength(8);
     expect(suggestedJudging.reduce((sum, item) => sum + item.weight, 0)).toBe(100);
     expect(event.startDateTime).toBe("2026-10-15T09:00:00+05:30");

@@ -301,12 +301,16 @@ export function RegistrationButton({
 
   if (open) {
     return (
-      <RegistrationDialog>
-        <Button size="lg" variant={inverse ? "inverse" : "default"} className={className}>
+      <Button asChild size="lg" variant={inverse ? "inverse" : "default"} className={className}>
+        <a
+          href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {label}
           <ArrowUpRight />
-        </Button>
-      </RegistrationDialog>
+        </a>
+      </Button>
     );
   }
 
@@ -380,14 +384,15 @@ export function Navbar() {
           </nav>
 
           <div className="nav-actions flex items-center gap-3 sm:gap-4">
-            <RegistrationDialog>
-              <button
-                type="button"
-                className="rounded-full px-5 py-2 text-xs font-semibold tracking-wide transition-all shadow-xs cursor-pointer hover:scale-102 active:scale-98 bg-[#bf472c] text-white hover:bg-[#a83d24] hover:shadow-md"
-              >
-                Register Now
-              </button>
-            </RegistrationDialog>
+            <a
+              href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full px-5 py-2 text-xs font-semibold tracking-wide transition-all shadow-xs cursor-pointer hover:scale-102 active:scale-98 bg-[#bf472c] text-white hover:bg-[#a83d24] hover:shadow-md inline-flex items-center gap-1.5"
+            >
+              <span>Register Now</span>
+              <ArrowUpRight size={13} />
+            </a>
 
             <button
               type="button"
@@ -428,15 +433,16 @@ export function Navbar() {
               </Link>
             ))}
             <div className="pt-2">
-              <RegistrationDialog>
-                <button
-                  type="button"
-                  className="w-full py-2.5 rounded-full text-xs font-semibold bg-[#bf472c] text-white hover:bg-[#a83d24] cursor-pointer"
-                  onClick={() => setMenu(false)}
-                >
-                  Register Now
-                </button>
-              </RegistrationDialog>
+              <a
+                href={event.registrationUrl ?? "https://events.ajstudioz.co.in/register/auragen-mafqr0"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 rounded-full text-xs font-semibold bg-[#bf472c] text-white hover:bg-[#a83d24] cursor-pointer text-center flex items-center justify-center gap-1.5"
+                onClick={() => setMenu(false)}
+              >
+                <span>Register Now</span>
+                <ArrowUpRight size={13} />
+              </a>
             </div>
           </nav>
         )}
@@ -527,14 +533,48 @@ export function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 AuraGen. All rights reserved. · Sona College of Technology</span>
-          <span className="studio-credit inline-flex items-center gap-2 text-xs text-muted-foreground font-medium">
-            <span>Dev BY</span>
-            <img
-              src="/aj-logo.png"
-              alt="Developer logo"
-              className="w-5 h-5 rounded-full object-contain"
-            />
-          </span>
+          <div className="relative group/studio inline-block">
+            <a
+              href="https://ajstudiozz.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="studio-credit inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground font-medium transition-colors cursor-pointer py-1 px-2.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 border border-transparent hover:border-border/60"
+              title="Visit AJ Studioz (https://ajstudiozz.vercel.app)"
+            >
+              <span>Dev BY</span>
+              <img
+                src="/aj-logo.png"
+                alt="AJ Studioz"
+                className="w-5 h-5 rounded-full object-contain ring-1 ring-border group-hover/studio:ring-[#bf472c] transition-all group-hover/studio:scale-110"
+              />
+            </a>
+
+            {/* Hover Prompt to Redirect */}
+            <div className="pointer-events-none group-hover/studio:pointer-events-auto absolute bottom-full right-0 mb-2 w-64 rounded-2xl bg-card border border-border/90 shadow-2xl backdrop-blur-xl p-3 text-left opacity-0 translate-y-2 group-hover/studio:opacity-100 group-hover/studio:translate-y-0 transition-all duration-200 z-50">
+              <div className="flex items-center gap-2 mb-1.5">
+                <img src="/aj-logo.png" alt="AJ Studioz" className="w-5 h-5 rounded-full object-contain ring-1 ring-border" />
+                <div>
+                  <div className="text-xs font-bold text-foreground">AJ Studioz</div>
+                  <div className="text-[10px] text-muted-foreground">Developer Portfolio</div>
+                </div>
+                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 ml-auto">
+                  Online
+                </span>
+              </div>
+              <p className="text-[11px] text-muted-foreground leading-snug mb-2.5">
+                Visit <span className="text-[#bf472c] font-medium underline underline-offset-2">ajstudiozz.vercel.app</span>? Click below to redirect.
+              </p>
+              <a
+                href="https://ajstudiozz.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 rounded-lg text-xs font-semibold bg-[#bf472c] text-white hover:bg-[#a83d24] transition-all shadow-xs cursor-pointer"
+              >
+                <span>Redirect to Site</span>
+                <ArrowUpRight size={13} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
