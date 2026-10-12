@@ -12,14 +12,9 @@ import {
   Dumbbell,
   Lightbulb,
   MapPin,
-  Pause,
-  Pill,
-  Play,
   Sparkles,
   Users,
   Utensils,
-  Volume2,
-  VolumeX,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -54,21 +49,20 @@ export function Eyebrow({ children, number }: { children: React.ReactNode; numbe
 }
 export function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isSoundOn, setIsSoundOn] = useState(true);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // By default sound is ON only
+    // Non-mutable: Video plays with sound constantly, cannot be muted
     video.muted = false;
     video.volume = 1;
 
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        // If browser policies block unmuted autoplay without interaction:
-        // Play muted so video plays nonstop immediately, and restore sound on first gesture.
+        // If browser policies temporarily restrict unmuted autoplay before user interaction:
+        // Play muted so video starts instantly, and immediately unmute on first gesture.
         video.muted = true;
         video.play().catch(() => {});
 
@@ -77,7 +71,6 @@ export function VideoHero() {
             videoRef.current.muted = false;
             videoRef.current.volume = 1;
             videoRef.current.play().catch(() => {});
-            setIsSoundOn(true);
           }
           window.removeEventListener("click", enableSoundOnGesture);
           window.removeEventListener("keydown", enableSoundOnGesture);
@@ -91,24 +84,12 @@ export function VideoHero() {
     }
   }, []);
 
-  const toggleSound = () => {
-    if (videoRef.current) {
-      const next = !isSoundOn;
-      setIsSoundOn(next);
-      videoRef.current.muted = !next;
-      if (next) {
-        videoRef.current.volume = 1;
-        videoRef.current.play().catch(() => {});
-      }
-    }
-  };
-
   return (
     <section
       className="relative w-full min-h-[85vh] lg:min-h-[92vh] flex flex-col justify-end overflow-hidden bg-black text-white"
       aria-label="AuraGen 2026 Video Hero"
     >
-      {/* Full-bleed Background Video - Nonstop playable, no option to pause */}
+      {/* Full-bleed Background Video - Nonstop playable, non-mutable (always unmuted) */}
       <video
         ref={videoRef}
         src={event.introVideoPath ?? "/Intro.mp4"}
@@ -116,6 +97,15 @@ export function VideoHero() {
         autoPlay
         loop
         playsInline
+        onVolumeChange={(e) => {
+          // Enforce non-mutable behavior: keep unmuted and full volume
+          if (e.currentTarget.muted) {
+            e.currentTarget.muted = false;
+          }
+          if (e.currentTarget.volume !== 1) {
+            e.currentTarget.volume = 1;
+          }
+        }}
         onPause={(e) => {
           // Video plays nonstop
           e.currentTarget.play().catch(() => {});
@@ -164,7 +154,7 @@ export function VideoHero() {
             </a>
           </div>
 
-          {/* Right Column: 3 Stats Columns & Sound Control Button */}
+          {/* Right Column: 3 Stats Columns */}
           <div className="flex items-end justify-between lg:justify-end gap-6 md:gap-10">
             <div className="flex items-center gap-5 sm:gap-8">
               <div>
@@ -192,33 +182,6 @@ export function VideoHero() {
                 <div className="text-xs text-white/70 mt-1">Teams of 3–4 Members</div>
               </div>
             </div>
-
-            {/* Sound Alone Pausable Control (Default sound ON, video plays nonstop) */}
-            <button
-              type="button"
-              onClick={toggleSound}
-              className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/55 hover:bg-black/80 backdrop-blur-md border border-white/20 hover:border-white/40 text-white transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95 shrink-0"
-              title={isSoundOn ? "Pause sound (Mute)" : "Play sound (Sound ON)"}
-              aria-label={isSoundOn ? "Pause sound" : "Play sound"}
-            >
-              {isSoundOn ? (
-                <>
-                  <Volume2 size={16} className="text-[#e8a391] animate-pulse" />
-                  <span className="text-xs font-semibold tracking-wide">Sound ON</span>
-                  {/* Subtle animated sound wave bars */}
-                  <span className="flex items-end gap-0.5 h-3 ml-0.5" aria-hidden="true">
-                    <span className="w-0.5 h-2 bg-[#e8a391] rounded-full animate-pulse" />
-                    <span className="w-0.5 h-3 bg-[#e8a391] rounded-full animate-pulse [animation-delay:150ms]" />
-                    <span className="w-0.5 h-1.5 bg-[#e8a391] rounded-full animate-pulse [animation-delay:300ms]" />
-                  </span>
-                </>
-              ) : (
-                <>
-                  <VolumeX size={16} className="text-white/60" />
-                  <span className="text-xs font-medium text-white/70">Sound Paused</span>
-                </>
-              )}
-            </button>
           </div>
         </div>
       </div>
