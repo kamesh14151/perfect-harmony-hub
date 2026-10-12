@@ -228,31 +228,22 @@ export function Hero() {
   return (
     <section
       id="vision"
-      className="relative z-10 w-full overflow-hidden bg-[#0c0e12] text-white border-t border-white/10 py-16 md:py-24"
+      className="relative z-10 bg-background text-foreground border-t border-border/80 pt-14 md:pt-20 pb-20 transition-colors"
       aria-label="AuraGen 2026 Overview"
     >
-      {/* Real Sona College Campus Photograph as Full Section Backdrop */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="/IMG_dbbd97c0-dd87-4ff2-b952-92fff78f57aa.jpg"
-          alt="Sona College of Technology Campus"
-          className="w-full h-full object-cover object-center scale-102 filter brightness-[0.75] contrast-[1.1]"
-        />
-        {/* Cinematic gradient & vignette: keeps the campus visible while ensuring high contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/85" />
-        <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px]" />
-      </div>
-
-      <div className="shell relative z-10">
-        {/* Ultra-Premium Glassmorphic Briefing & Countdown Hero Card */}
-        <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 sm:p-12 md:p-16 border border-white/20 bg-black/65 backdrop-blur-xl shadow-2xl">
-          {/* Sona College Campus Subtle Inner Watermark */}
-          <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+      <div className="shell">
+        {/* Ultra-Premium Glassmorphic Briefing & Countdown Hero Bar */}
+        <div className="relative overflow-hidden rounded-[32px] md:rounded-[40px] p-8 sm:p-12 md:p-16 border border-border/80 shadow-2xl bg-[#0c0e12] text-white">
+          {/* Sona College Campus Photograph Sized to this Bar Alone */}
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <img
               src="/IMG_dbbd97c0-dd87-4ff2-b952-92fff78f57aa.jpg"
               alt="Sona College of Technology Campus"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-center filter brightness-[0.72] contrast-[1.1]"
             />
+            {/* Cinematic gradient & vignette to keep campus clearly visible while guaranteeing sharp contrast */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/88 via-black/75 to-black/45" />
+            <div className="absolute inset-0 bg-radial from-transparent via-black/15 to-black/50 pointer-events-none" />
           </div>
 
           {/* Ambient Accent Glows */}
