@@ -89,6 +89,10 @@ export const organizers: Organizer[] = [
     role: "Organizer",
     imageFilename: "Kamez.png",
     department: "Department of AI & ML",
+    linkedin: "https://www.linkedin.com/in/kamesh-ravichandran-9723b6326?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+    instagram: "https://www.instagram.com/ajkamez_offl?cplk=Z25rcnExMnVmeDk5",
+    twitter: "https://x.com/Kamesh14151",
+    threads: "https://www.threads.net/@ajkamez_offl",
   },
   {
     name: "Raaj Nikitaa",
