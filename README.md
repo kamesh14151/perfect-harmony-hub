@@ -1,14 +1,46 @@
-# Welcome to your Lovable project
+# Perfect Harmony Hub
+
+Build perfectly 
+
+Also these are all organizers
+
+Kanish s 
+
+2 Sarvesh p
+
+3 Ajay 😌
+
+4 Nithish 😎😂 
+
+5 Dev 😊 
+
+6 Elango Member
+
+7 Nithyasri Member
+
+8 Kamesh Member — 
+
+9 Raaj Nikitaa Member
+
+10 Kamali 😌 Member
+
+11 Kavyashree Member
+
+12 Sridevi Member
+
+13 Srinivasan M Member
+
+14 Sudhish Vijai Member
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/648e9563-7b0b-41f9-a586-5c7b351de467).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +52,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
