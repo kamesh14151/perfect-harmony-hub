@@ -1,3 +1,4 @@
+import { event } from "@/config/event";
 import portrait0 from "@/assets/placeholders/kanish-s.jpg.asset.json";
 import portrait1 from "@/assets/placeholders/sarvesh-p.jpg.asset.json";
 import portrait2 from "@/assets/placeholders/ajay.jpg.asset.json";
@@ -27,29 +28,61 @@ export interface Organizer {
 }
 
 export const organizers: Organizer[] = [
-  { name: "Kanish S", image: portrait0.url, imageIsPlaceholder: true, imageFilename: "kanish-s.jpg" }, { name: "Sarvesh P", image: portrait1.url, imageIsPlaceholder: true, imageFilename: "sarvesh-p.jpg" }, { name: "Ajay", image: portrait2.url, imageIsPlaceholder: true, imageFilename: "ajay.jpg" },
-  { name: "Nithish", image: portrait3.url, imageIsPlaceholder: true, imageFilename: "nithish.jpg" }, { name: "Dev", image: portrait4.url, imageIsPlaceholder: true, imageFilename: "dev.jpg" }, { name: "Elango", image: portrait5.url, imageIsPlaceholder: true, imageFilename: "elango.jpg", role: "Member" },
-  { name: "Nithyasri", image: portrait6.url, imageIsPlaceholder: true, imageFilename: "nithyasri.jpg", role: "Member" }, { name: "Kamesh", image: portrait7.url, imageIsPlaceholder: true, imageFilename: "kamesh.jpg", role: "Member" },
-  { name: "Raaj Nikitaa", image: portrait8.url, imageIsPlaceholder: true, imageFilename: "raaj-nikitaa.jpg", role: "Member" }, { name: "Kamali", image: portrait9.url, imageIsPlaceholder: true, imageFilename: "kamali.jpg", role: "Member" },
-  { name: "Kavyashree", image: portrait10.url, imageIsPlaceholder: true, imageFilename: "kavyashree.jpg", role: "Member" }, { name: "Sridevi", image: portrait11.url, imageIsPlaceholder: true, imageFilename: "sridevi.jpg", role: "Member" },
-  { name: "Srinivasan M", image: portrait12.url, imageIsPlaceholder: true, imageFilename: "srinivasan-m.jpg", role: "Member" }, { name: "Sudhish Vijai", image: portrait13.url, imageIsPlaceholder: true, imageFilename: "sudhish-vijai.jpg", role: "Member" },
+  { name: "Kanish S", image: portrait0.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kanish-s.jpg" }, { name: "Sarvesh P", image: portrait1.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "sarvesh-p.jpg" }, { name: "Ajay", image: portrait2.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "ajay.jpg" },
+  { name: "Nithish", image: portrait3.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "nithish.jpg" }, { name: "Dev", image: portrait4.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "dev.jpg" }, { name: "Elango", image: portrait5.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "elango.jpg" },
+  { name: "Nithyasri", image: portrait6.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "nithyasri.jpg" }, { name: "Kamesh", image: portrait7.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kamesh.jpg" },
+  { name: "Raaj Nikitaa", image: portrait8.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "raaj-nikitaa.jpg" }, { name: "Kamali", image: portrait9.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kamali.jpg" },
+  { name: "Kavyashree", image: portrait10.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "kavyashree.jpg" }, { name: "Sridevi", image: portrait11.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "sridevi.jpg" },
+  { name: "Srinivasan M", image: portrait12.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "srinivasan-m.jpg" }, { name: "Sudhish Vijai", image: portrait13.url, imageIsPlaceholder: true, role: "Organizer", imageFilename: "sudhish-vijai.jpg" },
 ];
 
 export const tracks = [
-  { title: "Artificial Intelligence & Machine Learning", short: "Intelligence, applied.", description: "Explore intelligent systems, meaningful data, and new ways to solve complex problems.", detail: "A proposed direction for ideas in machine learning, intelligent automation, and data-driven solutions. Official problem statements will be announced.", icon: "brain" },
-  { title: "Web & App Development", short: "Build better experiences.", description: "Turn everyday challenges into thoughtful, useful digital experiences.", detail: "A proposed direction for web platforms, mobile experiences, and accessible digital tools. Official problem statements will be announced.", icon: "code" },
-  { title: "Open Innovation", short: "No limits. Just possibilities.", description: "Bring a fresh perspective. Find your own problem and create something unexpected.", detail: "A proposed direction for original ideas across disciplines. Final track rules and problem statements will be announced.", icon: "spark" },
+  { title: "Basic – AI-Powered Website Development", short: "Track 1 · Basic", description: "Build a useful website through AI prompting, iteration, and thoughtful design.", detail: "Use AI-assisted prompting to create and refine a working website. Suggested submission: a live URL or locally runnable site, a short prompt log, and a demo. Official problem statements are pending.", icon: "code" },
+  { title: "Advanced – Machine Learning, Generative AI, and Agentic AI", short: "Track 2 · Advanced", description: "Build intelligent solutions with machine learning, generative models, or AI agents.", detail: "Develop a working prototype using machine learning, generative AI, or agentic workflows. Suggested submission: runnable code, setup instructions, model or agent documentation, and a demo. Official problem statements are pending.", icon: "brain" },
 ];
 
-export const schedule = ["Registration & Check-in", "Opening Ceremony", "Theme Reveal", "Hacking Begins", "Mentoring & Progress Review", "Project Submission", "Final Presentations", "Results & Closing Ceremony"];
+// Suggested by request; these timings are not the confirmed event schedule.
+export const schedule = [
+  { title: "Registration & Check-in", time: "9:00 – 9:30 AM" },
+  { title: "Opening Ceremony & Track Briefing", time: "9:30 – 10:00 AM" },
+  { title: "Hacking Begins", time: "10:00 AM – 12:30 PM" },
+  { title: "Lunch Break", time: "12:30 – 1:00 PM" },
+  { title: "Build, Mentor & Refine", time: "1:00 – 3:30 PM" },
+  { title: "Project Submission", time: "3:30 – 3:45 PM" },
+  { title: "Final Presentations & Judging", time: "3:45 – 4:45 PM" },
+  { title: "Results & Closing Ceremony", time: "4:45 – 5:00 PM" },
+];
+
+export const suggestedRules = [
+  "Teams of 3–4 members choose one track and submit one project.",
+  "Build the core project during the hackathon. Declare any pre-existing code, templates, datasets, or models.",
+  "AI tools and open-source resources are allowed; disclose their use and respect licenses.",
+  "Use only data you are authorized to access. Do not include private information, passwords, or API keys in submissions.",
+  "Credit all sources, work respectfully, and do not copy another team's project.",
+  "Bring a laptop, charger, and required software. Internet and lab equipment availability are to be confirmed.",
+];
+export const suggestedSubmission = [
+  "Submit a repository or project archive with a README, setup instructions, team names, and selected track.",
+  "Include a working demo or accessible website link; list AI tools, prompts, models, datasets, and external resources used.",
+  "Prepare a suggested 3-minute presentation and 2-minute Q&A covering the problem, solution, implementation, and limitations.",
+  "The official submission channel and final deadline will be announced by the organizers.",
+];
+export const suggestedJudging = [
+  { criterion: "Problem relevance & impact", weight: 25 },
+  { criterion: "Working implementation", weight: 30 },
+  { criterion: "Creativity & originality", weight: 20 },
+  { criterion: "Track-specific execution", weight: 15 },
+  { criterion: "Presentation & documentation", weight: 10 },
+];
 
 export const faqs = [
-  ["Who can participate in SPARKS26?", "SPARKS26 is an internal hackathon at Sona College of Technology. Detailed eligibility requirements will be announced by the organizing team."],
-  ["Is participation individual or team-based?", "The organizers will announce the participation format and team-size guidelines."],
-  ["How do I register?", "Registration details and the official registration link will be announced soon."],
-  ["What should participants bring?", "The organizing team will share the required equipment and preparation guidelines before the event."],
-  ["What are the official hackathon tracks?", "Artificial Intelligence & Machine Learning, Web & App Development, and Open Innovation are proposed tracks. The final categories will be confirmed by the organizers."],
-  ["Is there a registration fee?", "Registration fees, if any, will be announced by the organizing team."],
-  ["Where will the event take place?", "SPARKS26 will take place at Sona College of Technology, Salem, Tamil Nadu. The specific venue within the campus will be announced."],
-  ["Whom should I contact for assistance?", "Official contact details for the SPARKS26 organizing team will be announced soon."],
+  ["Who can participate in SPARKS26?", `Students from all years at ${event.institution} are eligible.`],
+  ["Is participation individual or team-based?", `Participation is team-based: ${event.teamSize}.`],
+  ["How do I register?", "The registration link, status, and deadline are still to be announced."],
+  ["What should participants bring?", "Suggested: a laptop, charger, and required software. Final equipment and internet arrangements are pending organizer approval."],
+  ["What are the official hackathon tracks?", "Track 1: Basic – AI-Powered Website Development (prompting). Track 2: Advanced – Machine Learning, Generative AI, and Agentic AI. Problem statements are to be announced."],
+  ["Is there a registration fee?", "No. Participation in SPARKS26 is free."],
+  ["Where will the event take place?", `${event.room}, ${event.institution}, Salem, Tamil Nadu.`],
+  ["What time does the event start?", "Suggested event hours are 9:00 AM – 5:00 PM IST on October 15, 2026. These timings are awaiting organizer approval."],
+  ["Whom should I contact for assistance?", `Contact the organizing team at ${event.email}.`],
 ];
