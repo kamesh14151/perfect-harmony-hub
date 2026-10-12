@@ -54,16 +54,51 @@ export function Eyebrow({ children, number }: { children: React.ReactNode; numbe
 }
 export function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isSoundOn, setIsSoundOn] = useState(true);
 
-  const togglePlay = () => {
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // By default sound is ON only
+    video.muted = false;
+    video.volume = 1;
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // If browser policies block unmuted autoplay without interaction:
+        // Play muted so video plays nonstop immediately, and restore sound on first gesture.
+        video.muted = true;
+        video.play().catch(() => {});
+
+        const enableSoundOnGesture = () => {
+          if (videoRef.current) {
+            videoRef.current.muted = false;
+            videoRef.current.volume = 1;
+            videoRef.current.play().catch(() => {});
+            setIsSoundOn(true);
+          }
+          window.removeEventListener("click", enableSoundOnGesture);
+          window.removeEventListener("keydown", enableSoundOnGesture);
+          window.removeEventListener("touchstart", enableSoundOnGesture);
+        };
+
+        window.addEventListener("click", enableSoundOnGesture, { once: true });
+        window.addEventListener("keydown", enableSoundOnGesture, { once: true });
+        window.addEventListener("touchstart", enableSoundOnGesture, { once: true });
+      });
+    }
+  }, []);
+
+  const toggleSound = () => {
     if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
+      const next = !isSoundOn;
+      setIsSoundOn(next);
+      videoRef.current.muted = !next;
+      if (next) {
+        videoRef.current.volume = 1;
+        videoRef.current.play().catch(() => {});
       }
     }
   };
@@ -73,16 +108,19 @@ export function VideoHero() {
       className="relative w-full min-h-[85vh] lg:min-h-[92vh] flex flex-col justify-end overflow-hidden bg-black text-white"
       aria-label="AuraGen 2026 Video Hero"
     >
-      {/* Full-bleed Background Video */}
+      {/* Full-bleed Background Video - Nonstop playable, no option to pause */}
       <video
         ref={videoRef}
         src={event.introVideoPath ?? "/Intro.mp4"}
         poster={event.videoPosterUrl ?? undefined}
         autoPlay
-        muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover scale-101"
+        onPause={(e) => {
+          // Video plays nonstop
+          e.currentTarget.play().catch(() => {});
+        }}
+        className="absolute inset-0 w-full h-full object-cover scale-101 pointer-events-none"
       />
 
       {/* Subtle Ambient Vignette & Bottom Dissolve */}
@@ -126,7 +164,7 @@ export function VideoHero() {
             </a>
           </div>
 
-          {/* Right Column: 3 Stats Columns & Circular Play/Pause Button */}
+          {/* Right Column: 3 Stats Columns & Sound Control Button */}
           <div className="flex items-end justify-between lg:justify-end gap-6 md:gap-10">
             <div className="flex items-center gap-5 sm:gap-8">
               <div>
@@ -155,15 +193,31 @@ export function VideoHero() {
               </div>
             </div>
 
-            {/* Circular Video Pause/Play Button */}
+            {/* Sound Alone Pausable Control (Default sound ON, video plays nonstop) */}
             <button
               type="button"
-              onClick={togglePlay}
-              className="w-9 h-9 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white/90 hover:text-white hover:bg-black/70 flex items-center justify-center transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95 shrink-0"
-              title={isPlaying ? "Pause video" : "Play video"}
-              aria-label={isPlaying ? "Pause video" : "Play video"}
+              onClick={toggleSound}
+              className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/55 hover:bg-black/80 backdrop-blur-md border border-white/20 hover:border-white/40 text-white transition-all cursor-pointer shadow-lg hover:scale-105 active:scale-95 shrink-0"
+              title={isSoundOn ? "Pause sound (Mute)" : "Play sound (Sound ON)"}
+              aria-label={isSoundOn ? "Pause sound" : "Play sound"}
             >
-              {isPlaying ? <Pause size={13} /> : <Play size={13} />}
+              {isSoundOn ? (
+                <>
+                  <Volume2 size={16} className="text-[#e8a391] animate-pulse" />
+                  <span className="text-xs font-semibold tracking-wide">Sound ON</span>
+                  {/* Subtle animated sound wave bars */}
+                  <span className="flex items-end gap-0.5 h-3 ml-0.5" aria-hidden="true">
+                    <span className="w-0.5 h-2 bg-[#e8a391] rounded-full animate-pulse" />
+                    <span className="w-0.5 h-3 bg-[#e8a391] rounded-full animate-pulse [animation-delay:150ms]" />
+                    <span className="w-0.5 h-1.5 bg-[#e8a391] rounded-full animate-pulse [animation-delay:300ms]" />
+                  </span>
+                </>
+              ) : (
+                <>
+                  <VolumeX size={16} className="text-white/60" />
+                  <span className="text-xs font-medium text-white/70">Sound Paused</span>
+                </>
+              )}
             </button>
           </div>
         </div>
