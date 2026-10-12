@@ -83,7 +83,7 @@
 .nav-inner { height: 100%; display:flex; align-items:center; justify-content:space-between; gap:24px; }
 .brand-text { font-family: var(--font-sans); font-weight:700; font-size:25px; line-height:1; }
 .brand-text span { color: var(--year); }
-.brand-image { width:145px; height:42px; object-fit:contain; }
+.brand-image { width:42px; height:42px; object-fit:contain; }
 .film-logo { width:min(65%, 520px); height:120px; object-fit:contain; }
 .nav-links { display:flex; align-items:center; gap:26px; }
 .nav-link { font-size:12px; color:var(--muted-foreground); transition:color .2s; position:relative; }
@@ -96,6 +96,26 @@
 .intro { padding-top:37px; }
 .intro-top { display:flex; justify-content:space-between; margin-bottom:16px; }
 .intro-top .edition { font-size:10px; color:var(--muted-foreground); }
+.intro-top { align-items:center; gap:12px; }
+.studio-presents { display:flex; align-items:center; gap:10px; font-size:10px; font-weight:600; }
+.studio-presents img { width:34px; height:34px; object-fit:contain; }
+.studio-credit { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.studio-wordmark { display:inline-flex; align-items:center; gap:8px; }
+.studio-wordmark img { width:32px; height:32px; object-fit:contain; }
+.event-facts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; margin-bottom:40px; padding-block:24px; border-block:1px solid var(--border); }
+.event-facts dt { color:var(--muted-foreground); font-size:11px; margin-bottom:8px; }
+.event-facts dd { margin:0; font-size:14px; line-height:1.6; }
+.track-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.track-card .track-level { color:var(--brand); font-size:10px; margin:0 0 10px; }
+.event-guidelines { margin-top:60px; padding-top:40px; border-top:1px solid var(--border); }
+.guideline-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:40px; margin-bottom:35px; }
+.event-guidelines h3 { font-size:15px; font-weight:600; }
+.event-guidelines ol { padding-left:20px; font-size:12px; line-height:1.8; color:var(--muted-foreground); }
+.event-guidelines li { margin-bottom:12px; }
+.guideline-note { color:var(--muted-foreground); font-size:12px; line-height:1.8; }
+.judging-list { max-width:620px; margin-top:20px; }
+.judging-list > div { display:flex; justify-content:space-between; gap:20px; border-bottom:1px solid var(--border); padding-block:14px; font-size:12px; }
+.judging-list dd { margin:0; white-space:nowrap; color:var(--muted-foreground); }
 .film { aspect-ratio:16/9; background:var(--film-gradient); color:var(--inverse-foreground); border:1px solid var(--film-edge); border-radius:12px; overflow:hidden; position:relative; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-film); }
 .film:before,.film:after { content:""; position:absolute; width:18px; height:18px; border-color:var(--film-edge); border-style:solid; pointer-events:none; }
 .film:before { top:24px; left:24px; border-width:1px 0 0 1px; }
@@ -190,7 +210,7 @@
 .footer-description { font-size:11px; line-height:1.8; color:var(--inverse-muted); max-width:270px; margin-top:17px; }
 .footer-nav { display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start; font-size:11px; color:var(--inverse-muted); }
 .footer-bottom { border-top:1px solid var(--film-edge); padding-top:23px; display:flex; justify-content:space-between; gap:20px; align-items:center; color:var(--inverse-muted); font-size:10px; }
-.studio-wordmark { font-family:var(--font-display); font-style:italic; font-size:20px; color:var(--inverse-foreground); margin-left:6px; }
+.studio-wordmark { font-family:var(--font-sans); font-size:11px; color:var(--inverse-foreground); }
 .reveal { animation:enter .7s cubic-bezier(.16,1,.3,1) both; }
 @keyframes enter { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 @media(min-width:1024px) { .mobile-trigger { display:none; } }
@@ -199,6 +219,9 @@
   .shell { width:calc(100% - 40px); }
   .nav-inner { gap:12px; } .nav-actions { gap:4px; } .brand-text { font-size:23px; }
   .nav-register { display:none; }
+  .event-facts { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  .guideline-columns { grid-template-columns:1fr; gap:24px; }
+  .section-status { white-space:normal; line-height:1.6; }
   .intro { padding-top:25px; } .intro-top { margin-bottom:13px; }
   .film-title { font-size:43px; } .film-kicker { font-size:7px; margin-bottom:14px; }
   .film-symbol { width:18px; height:18px; margin-bottom:8px; }
