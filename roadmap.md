@@ -5,4 +5,7 @@
 - [x] Build the complete single-scroll event experience and design system.
 - [x] Add all 14 organizers and truthful configurable event information.
 - [x] Verify navigation, themes, FAQ, countdown and mobile layout.
-- [ ] Official logo, intro video, portraits, registration link and final event details — waiting for supplied assets/information.
+- [ ] Add supplied site/AJ STUDIOZ logos and intro video, including site favicon.
+- [ ] Apply confirmed venue, tracks, eligibility, team size, fee, contacts and Organizer roles.
+- [ ] Add clearly labeled suggested timings, rules, submission and judging details; verify the pages and video.
+- [ ] Registration link/status/deadline, organizer portraits and approval of suggested event details — waiting for user information.
